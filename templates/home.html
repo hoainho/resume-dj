@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+{% load %}
+{% block content %}
+<div class="flex min-h-screen flex-col items-center justify-between mx-24 mb-32 sm:mb-0">
+  <div class="relative w-[100vw] sm:w-full h-full sm:h-screen py-0 mt-0 sm:py-8 sm:mt-12 sm:mt-0">
+    <div class="absolute inset-0 w-full sm:w-[45%] h-full bg-[#E6DACE] z-[-1] top-32 sm:top-0"></div>
+    <div class="flex w-full h-full flex items-center justify-center flex-col sm:flex-row">
+      <div class="flex flex-col items-center shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
+        <div class="flex flex-col items-center justify-center py-14 bg-[#F4ECE6] w-[320px] sm:w-[375px]">
+          <img
+            src="{% static 'img/IMG_9893.jpg' %}"
+            alt="avatar"
+            width={205}
+            height={205}
+            class="rounded-full h-[205px] border object-cover p-1 mb-8"
+          />
+          <h1 class="font-bold text-4xl uppercase">{{ profile }}</h1>
+          <div class="w-[50px] h-[2px] bg-primary my-8"></div>
+          <h1 class="font-light text-2xl tracking-wide uppercase px-5 break-word">
+            {{ profile.major }}
+          </h1>
+        </div>
+        <div class="bg-white w-full py-3 flex justify-center">
+          {% include 'social.html' %}
+        </div>
+      </div>
+      <div class="flex flex-col justify-start items-baseline px-5 py-4 max-w-md">
+        <h1 class="font-black text-[88px] my-2 tracking-widest uppercase stroke-1">
+          Hello
+        </h1>
+        <h1 class="font-light text-2xl uppercase my-8">
+          Here's who I am & what I do
+        </h1>
+        <div class="flex justify-start items-baseline mb-14">
+          <a href="/resume">
+            <button
+              type="button"
+              class="py-2 px-8 bg-primary text-white uppercase rounded-3xl"
+            >
+              resume
+            </button>
+          </a>
+          <a href="/projects">
+            <button
+              type="button"
+              class="py-2 px-8 ml-4 bg-white text-primary border border-primary uppercase rounded-3xl"
+            >
+              projects
+            </button>
+          </a>
+        </div>
+        <h2 class="break-word text-justify mb-8 text-medium"> {{ profile.introduce }}</h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+

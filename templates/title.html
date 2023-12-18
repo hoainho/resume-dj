@@ -1,0 +1,8 @@
+<div class="flex items-center justify-center">
+    <i class="fa-solid fa-palette text-primary text-3xl mr-2"></i>
+    <a href="{{ request.path|slice:':-1' }}">
+      <h1 class="font-black text-[30px] my-2 tracking-widest uppercase">
+        {{ request.path|slice:"1:-1" }}
+      </h1>
+    </a>
+  </div>

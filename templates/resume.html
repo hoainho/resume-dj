@@ -1,0 +1,125 @@
+{% extends "base.html" %} {% load static %} {% load %} {% block content %}
+<div class="flex flex-col items-center px-5 sm:px-24 py-8 bg-[#E6DACE]">
+  <div class="my-20">{% include 'title.html' %}</div>
+
+  <div class="w-full sm:w-[724px]">
+    <div class="w-full mb-12">
+      <div class="flex justify-between items-center mb-12">
+        <h1
+          class="font-black text-[22px] sm:text-[24px] my-2 tracking-widest capitalize sm:uppercase"
+        >
+          Experience
+        </h1>
+        <a
+          href="{% static '/pdf/NhoNH-profile.pdf' %}"
+          download
+          class="py-1 px-6 sm:px-8 bg-primary text-white uppercase rounded-3xl h-[34px] sm:h-[40px] flex items-center justify-center text-[14px] sm:text-[24px]"
+        >
+          Download cv <i class="ml-2 fa-solid fa-download"></i>
+        </a>
+      </div>
+      {% for project in projects %}
+      <div class="px-12 py-20 bg-white mb-12" key="{project.id}">
+        <h1 class="text-primary font-bold text-2xl mb-4">
+          {{project.timeline}}
+        </h1>
+        <div
+          class="w-full flex flex-col sm:flex-row justify-between items-start text-lg"
+        >
+          <div class="w-full sm:w-50 mb-3 sm:mb-0">
+            <h1 class="font-light uppercase text-medium mb-3">
+              {{project.position}}
+            </h1>
+            <h2 class="font-light text-medium mb-1 sm:mb-3">
+              {{project.company_name}}
+            </h2>
+            <h3 class="font-light text-medium mb-5">{{project.location}}</h3>
+            {% if project.assets_link %}
+            <a
+              target="_blank"
+              href="{{project.assets_link}}"
+              class="font-light text-medium py-2 px-3 bg-primary text-white rounded"
+              rel="noreferrer"
+            >
+              View my products
+            </a>
+            {% endif %}
+          </div>
+          <div class="w-full sm:w-50">
+            <p class="font-light text-medium">{{project.description}}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="w-full mb-12">
+      <div class="flex justify-between items-center mb-12">
+        <h1
+          class="font-black text-[22px] sm:text-[24px] my-2 tracking-widest capitalize sm:uppercase"
+        >
+          Education
+        </h1>
+      </div>
+      {% for education in educations %}
+      <div class="px-12 py-20 bg-white mb-12" key="{education.id}">
+        <h1 class="text-primary font-bold text-2xl mb-4">
+          {{education.timeline}}
+        </h1>
+        <div
+          class="w-full flex flex-col sm:flex-row justify-between items-start text-lg"
+        >
+          <div class="w-full sm:w-50 mb-3 sm:mb-0">
+            <h1 class="font-light uppercase text-medium mb-3">
+              {{education.position}}
+            </h1>
+            <h2 class="font-light text-medium mb-1 sm:mb-3">
+              {{education.companyName}}
+            </h2>
+            <h3 class="font-light text-medium mb-3">{{education.location}}</h3>
+          </div>
+          <div class="w-full sm:w-50">
+            <p class="font-light text-medium">{{education.description}}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="w-full px-12 py-16 sm:py-20 bg-white mb-12">
+      <div class="my-4 sm:my-8">
+        <h1 class="font-black text-[22px] sm:text-3xl mb-12 tracking-widest">
+          Professional skillset
+        </h1>
+        <div
+          class="w-full flex flex-col sm:flex-row flex-nowrap sm:flex-wrap justify-between items-start text-lg"
+        >
+          {% for skill in skills.main %}
+          <div class="w-full sm:w-50 flex justify-start items-center mb-5">
+            <i class="fa-solid fa-palette text-primary text-xl mr-2"></i>
+            <h1 class="font-light text-medium">{{skill.title}}</h1>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="my-4 sm:my-8">
+        <h1 class="font-black text-[22px] sm:text-3xl mb-12 tracking-widest">
+          Other
+        </h1>
+        <div
+          class="w-full flex flex-col sm:flex-row flex-nowrap sm:flex-wrap justify-between items-start text-lg"
+        >
+          {% for skill in skills.sub %}
+          <div class="w-full sm:w-50 flex justify-start items-center mb-5">
+            <i class="fa-solid fa-palette text-primary text-xl mr-2"></i>
+            <h1 class="font-light text-medium">{{skill.title}}</h1>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
