@@ -1,0 +1,28 @@
+{% load static %}
+{% load %}
+
+{% block content %}
+{% for project in projects %}
+<div
+  class="w-full h-full sm:h-[600px] flex flex-col sm:flex-row items-start mb-12"
+>
+  <div class="w-full sm:w-7/12 py-12 px-8 bg-white relative h-full">
+    <div class="title">
+      <h1 class="text-primary font-black text-3xl">{{project.name}}</h1>
+      <p class="font-bold text-lg mb-8">{{project.role}}</p>
+    </div>
+    <p class="font-light text-xl text-justify break-word">
+      {{project.description}}
+    </p>
+  </div>
+  <div class="w-full sm:w-5/12 relative h-full">
+    <img
+      src="{% static 'img/IMG_9893.jpg' %}"
+      alt="project1"
+      class="w-full h-[auto] sm:h-full object-cover"
+    />
+  </div>
+</div>
+{% endfor %}
+
+{% endblock content %}

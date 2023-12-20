@@ -201,7 +201,7 @@ class Refund(models.Model):
     def __str__(self):
         return f"{self.pk}"
 
-class ProjectItem(models.Model):
+class ExperienceItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     timeline = models.CharField(max_length=50)
     position = models.CharField(max_length=50)
@@ -211,6 +211,16 @@ class ProjectItem(models.Model):
     description = models.CharField(max_length=500)
     def __str__(self):
         return self.position + " - " + self.company_name
+
+class ProjectItem(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    name = models.CharField(max_length=50)
+    role = models.CharField(max_length=50)
+    description = models.CharField(max_length=500)
+    image = models.CharField(max_length=100, default="img/sample.jpg")
+    def __str__(self):
+        return self.name + " - " + self.role
+
 
 class EducationItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)

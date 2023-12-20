@@ -13,7 +13,7 @@ from django.utils import timezone
 from django.views.generic import ListView, DetailView, View
 
 from .forms import CheckoutForm, CouponForm, RefundForm, PaymentForm
-from .models import EducationItem, Item, OrderItem, Order, Address, Payment, Coupon, Refund, SkillItem, UserProfile, ProjectItem
+from .models import EducationItem, Item, OrderItem, Order, Address, Payment, Coupon, Refund, SkillItem, UserProfile, ProjectItem, ExperienceItem
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -361,19 +361,27 @@ class ResumeView(View):
     def get(self, *args, **kwargs):
         main_skills = SkillItem.objects.filter(user=self.request.user, type="K");
         sub_skills = SkillItem.objects.filter(user=self.request.user, type="O");
-        projects = ProjectItem.objects.filter(user=self.request.user);
+        experiences = ExperienceItem.objects.filter(user=self.request.user);
         educations = EducationItem.objects.filter(user=self.request.user);
-        print("Skill: ", main_skills)
         context = {
             'profile': self.request.user.userprofile,
             'skills': {
                 'main': main_skills,
                 'sub': sub_skills
             },
-            'projects': projects,
+            'projects': experiences,
             'educations': educations
         }
         return render(self.request, 'resume.html', context)
+
+class ProjectView(View):
+    def get(self, *args, **kwargs):
+        projects = ProjectItem.objects.filter(user=self.request.user);
+        context = {
+            'profile': self.request.user.userprofile,
+            'projects': projects,
+        }
+        return render(self.request, 'project.html', context)
 
 class LogoutView(View):
     template_name = "logout.html"

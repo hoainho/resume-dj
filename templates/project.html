@@ -1,0 +1,18 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% load %}
+{% block content %}
+<div class="flex flex-col items-center px-5 sm:px-24 py-8 bg-[#E6DACE]">
+    <div class="w-full sm:w-[750px]">
+      <div class="w-full my-20">
+        {% include 'title.html' %}
+        <p class="w-full break-all font-light text-lg mt-12 text-justify sm:text-center px-8 tracking-wide">
+          Thank you for looking at my projects, here are some of my favorites. In addition to the things listed here, I have many other unique and innovative products on the market, please contact me if you are interested to learn more
+        </p>
+      </div>
+      {% include 'project/project_list.html' %}
+    </div>
+  </div>
+
+{% endblock %}
