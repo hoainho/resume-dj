@@ -10,13 +10,21 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
-from django.views.generic import ListView, DetailView, View
-
+from django.views.generic import DetailView, View
 from .forms import CheckoutForm, CouponForm, RefundForm, PaymentForm
 from .models import EducationItem, Item, OrderItem, Order, Address, Payment, Coupon, Refund, SkillItem, UserProfile, ProjectItem, ExperienceItem
+from django.template import RequestContext
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
+
+def handler_404(request, exception):
+    return render(request, 'errors/404.html', status=404)
+
+def handler500(request, *args, **argv):
+    response = render('errors/500.html', {},
+                                  context_instance=RequestContext(request))
+    return response
 
 def create_ref_code():
     return ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
@@ -348,23 +356,30 @@ class PaymentView(View):
 class HomeView(View):
     def get(self, *args, **kwargs):
         try:
+            user_name = kwargs.get('user_name')
+            if kwargs.get('user_name') == 'default':
+                user_name = 'nho'
+            user_profile = UserProfile.objects.get(user__username=user_name)
             context = {
-                'profile': self.request.user.userprofile
+                'title': 'Home',
+                'profile': user_profile,
+                'user': self.request.user
             }
             return render(self.request, 'home.html', context)
         except ObjectDoesNotExist:
-            messages.warning(self.request, "The user profile not found, please re-login or check existing user profile")
-            return redirect("/")
-
+            messages.warning(self.request, "The user profile not found, will redirect to a default page")
+            return redirect("/nho/")
     
 class ResumeView(View):
     def get(self, *args, **kwargs):
-        main_skills = SkillItem.objects.filter(user=self.request.user, type="K");
-        sub_skills = SkillItem.objects.filter(user=self.request.user, type="O");
-        experiences = ExperienceItem.objects.filter(user=self.request.user);
-        educations = EducationItem.objects.filter(user=self.request.user);
+        main_skills = SkillItem.objects.filter(user__username=kwargs.get('user_name'), type="K");
+        sub_skills = SkillItem.objects.filter(user__username=kwargs.get('user_name'), type="O");
+        experiences = ExperienceItem.objects.filter(user__username=kwargs.get('user_name'));
+        educations = EducationItem.objects.filter(user__username=kwargs.get('user_name'));
+        user_profile = UserProfile.objects.get(user__username=kwargs.get('user_name'))
         context = {
-            'profile': self.request.user.userprofile,
+            'title': 'Resume',
+            'profile': user_profile,
             'skills': {
                 'main': main_skills,
                 'sub': sub_skills
@@ -376,12 +391,23 @@ class ResumeView(View):
 
 class ProjectView(View):
     def get(self, *args, **kwargs):
-        projects = ProjectItem.objects.filter(user=self.request.user);
+        projects = ProjectItem.objects.filter(user__username=kwargs.get('user_name'));
+        user_profile = UserProfile.objects.get(user__username=kwargs.get('user_name'))
         context = {
-            'profile': self.request.user.userprofile,
+            'title': 'Project',
+            'profile': user_profile,
             'projects': projects,
         }
         return render(self.request, 'project.html', context)
+
+class ContactView(View):
+    def get(self, *args, **kwargs):
+        user_profile = UserProfile.objects.get(user__username=kwargs.get('user_name'))
+        context = {
+            'title': 'Contact',
+            'profile': user_profile,
+        }
+        return render(self.request, 'contact.html', context)
 
 class LogoutView(View):
     template_name = "logout.html"

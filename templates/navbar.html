@@ -8,7 +8,7 @@
   >
     <div class="flex items-center justify-center">
       <i class="fa-solid {% if request.user.userprofile.major == 'Web Developer' %} fa-code {% else %} fa-palette {% endif %} text-primary text-3xl mr-2"></i>
-      <a href="/">
+      <a href="/v1/{{ profile }}">
         <h1 class="font-black text-[30px] my-2 tracking-widest uppercase">
           Duong
         </h1>
@@ -18,8 +18,8 @@
       <i class="fa-solid fa-chevron-right"></i>
     </span>
     <h1 class="text-xl font-light uppercase">
-      {% if request.path == "/" %} {{request.user.userprofile.major}} {% else %}
-      {{request.path|slice:"1:-1"}} {% endif %}
+      {% if request.path == "/v1/"|add:profile|add:"/" %}  {{userprofile.major}} {% else %}
+      {{ title }}{% endif %}
     </h1>
   </div>
   <div class="absolute inset-y-0 right-0 flex items-center sm:hidden">
@@ -67,7 +67,7 @@
   >
     <div class="navbar-item mx-2">
       <a
-        href="/"
+        href="{% url 'v1:home' user_name=profile %}"
         class="text-xl text-nowrap font-light uppercase {% if request.path == '/' %} text-primary {% endif %}"
       >
         About me
@@ -75,7 +75,7 @@
     </div>
     <div class="navbar-item mx-2">
       <a
-        href="/resume"
+        href="{% url 'v1:resume' user_name=profile %}"
         class="text-xl text-nowrap font-light uppercase {% if 'resume' in request.path %} text-primary {% endif %}"
       >
         Resume
@@ -83,7 +83,7 @@
     </div>
     <div class="navbar-item mx-2">
       <a
-        href="/projects"
+        href="{% url 'v1:projects' user_name=profile %}"
         class="text-xl text-nowrap font-light uppercase {% if 'project' in request.path %} text-primary {% endif %}"
       >
         Projects
@@ -91,7 +91,7 @@
     </div>
     <div class="navbar-item mx-2">
       <a
-        href="/contact"
+        href="{% url 'v1:contact' user_name=profile %}"
         class="text-xl text-nowrap font-light uppercase {% if 'contact' in request.path %} text-primary {% endif %}"
       >
         Contacts

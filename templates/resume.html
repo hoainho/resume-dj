@@ -1,4 +1,7 @@
-{% extends "base.html" %} {% load static %} {% load %} {% block content %}
+{% extends "base.html" %} 
+{% load static %} 
+{% load %} 
+{% block content %}
 <div class="flex flex-col items-center px-5 sm:px-24 py-8 bg-[#E6DACE]">
   <div class="my-20">{% include 'title.html' %}</div>
 
@@ -19,7 +22,7 @@
         </a>
       </div>
       {% for project in projects %}
-      <div class="px-12 py-20 bg-white mb-12" key="{project.id}">
+      <div class="px-12 py-20 bg-white mb-12">
         <h1 class="text-primary font-bold text-2xl mb-4">
           {{project.timeline}}
         </h1>
@@ -62,7 +65,7 @@
         </h1>
       </div>
       {% for education in educations %}
-      <div class="px-12 py-20 bg-white mb-12" key="{education.id}">
+      <div class="px-12 py-20 bg-white mb-12">
         <h1 class="text-primary font-bold text-2xl mb-4">
           {{education.timeline}}
         </h1>

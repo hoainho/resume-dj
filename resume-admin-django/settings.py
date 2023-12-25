@@ -24,9 +24,9 @@ print(BASE_DIR)
 SECRET_KEY = 'django-insecure-+4+rlu^y_n*gb6!b$0yi8=^cf=s_ac+z!o*99q-*lm(x=3gw_l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1', '[::1]']
 
 
 # Application definition
@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
     'django.contrib.sites',
+
     # 'allauth',
     # 'allauth.account',
     # 'allauth.socialaccount',
@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'fontawesomefree',
-    # 'django_browser_reload',
+    
     #own models
     'api',
 ]
@@ -77,8 +77,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'resume-admin-django.utils.list_icons',
-                'resume-admin-django.utils.list_footer',
             ],
         },
     },
@@ -142,9 +140,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/img/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),os.path.join(BASE_DIR, 'theme/static'),)
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -158,4 +157,3 @@ STRIPE_PUBLIC_KEY = 'STRIPE_TEST_PUBLIC_KEY'
 STRIPE_SECRET_KEY = 'STRIPE_TEST_SECRET_KEY'
 
 SITE_ID=2
-

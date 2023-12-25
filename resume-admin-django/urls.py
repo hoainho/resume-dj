@@ -16,14 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from api.views import LogoutView
 
 urlpatterns = [
-    path('', include('api.urls', namespace='api')),
-    path('account_logout/', LogoutView.as_view(), name='account_logout'),
-    path('resume/', LogoutView.as_view(), name='account_logout'),
-    path('account_logout/', LogoutView.as_view(), name='account_logout'),
+    path('v1/', include('api.urls', namespace='v1')),
     path('admin/', admin.site.urls),
     # path("__reload__/", include("django_browser_reload.urls")),
 
 ]
+
+handler404 = 'api.views.handler_404'
