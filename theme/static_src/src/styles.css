@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.text-primary{
+    color: #0D6EFD;
+}
+@media only screen and (max-width: 600px) {
+    .navbar-mobile{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 60%;
+        background: rgba(255, 255, 255, .8);
+        height: 100vh;
+        z-index: 999909090;
+        padding-left: 30px;
+    }
+    .nav-show{
+        opacity: 1;
+        max-width: 100%;
+        visibility: visible;
+        transition: all 0.5s ease-in-out;
+    }
+    .nav-hidden {
+        opacity: 0;
+        max-width: 0px;
+        visibility: hidden;
+        transition: all 0.5s ease-in-out;
+    }
+}

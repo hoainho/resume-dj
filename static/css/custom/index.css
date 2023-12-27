@@ -1,3 +1,6 @@
 .text-primary{
     color: #0D6EFD;
 }
+.navbar-mobile{
+    display: none;
+}

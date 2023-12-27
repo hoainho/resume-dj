@@ -7,7 +7,9 @@
     class="w-full flex justify-center sm:justify-start items-center flex-col sm:flex-row"
   >
     <div class="flex items-center justify-center">
-      <i class="fa-solid {% if request.user.userprofile.major == 'Web Developer' %} fa-code {% else %} fa-palette {% endif %} text-primary text-3xl mr-2"></i>
+      <i
+        class="fa-solid {% if request.user.userprofile.major == 'Web Developer' %} fa-code {% else %} fa-palette {% endif %} text-primary text-3xl mr-2"
+      ></i>
       <a href="/v1/{{ profile }}">
         <h1 class="font-black text-[30px] my-2 tracking-widest uppercase">
           Duong
@@ -18,8 +20,8 @@
       <i class="fa-solid fa-chevron-right"></i>
     </span>
     <h1 class="text-xl font-light uppercase">
-      {% if request.path == "/v1/"|add:profile|add:"/" %}  {{userprofile.major}} {% else %}
-      {{ title }}{% endif %}
+      {% if request.path == "/v1/"|add:profile|add:"/" %} {{userprofile.major}}
+      {% else %} {{ title }}{% endif %}
     </h1>
   </div>
   <div class="absolute inset-y-0 right-0 flex items-center sm:hidden">
@@ -28,6 +30,7 @@
       class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
       aria-controls="mobile-menu"
       aria-expanded="false"
+      onclick="showNavbar()"
     >
       <span class="absolute -inset-0.5"></span>
       <span class="sr-only">Open main menu</span>
@@ -62,13 +65,19 @@
     </button>
   </div>
   <div
-    class="justify-start items-start sm:items-center navbar-mobile-display sm:flex navbar-mobile"
-    ref="refTooltipNav"
+    class="justify-start items-start sm:items-center flex-col sm:flex-row sm:flex navbar-mobile nav-hidden"
   >
+    <button
+      type="button"
+      class="relative inline-flex items-centerrounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white sm:hidden"
+      onclick="hiddenNavbar()"
+    >
+      <i class="fa-solid fa-xmark"></i>
+    </button>
     <div class="navbar-item mx-2">
       <a
         href="{% url 'v1:home' user_name=profile %}"
-        class="text-xl text-nowrap font-light uppercase {% if request.path == '/' %} text-primary {% endif %}"
+        class="text-xl text-nowrap font-light uppercase {% if title == 'Home' %} text-primary {% endif %}"
       >
         About me
       </a>

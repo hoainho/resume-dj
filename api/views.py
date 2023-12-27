@@ -29,14 +29,6 @@ def handler500(request, *args, **argv):
 def create_ref_code():
     return ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
 
-
-def products(request):
-    context = {
-        'items': Item.objects.all()
-    }
-    return render(request, "products.html", context)
-
-
 def is_valid_form(values):
     valid = True
     for field in values:
@@ -354,6 +346,10 @@ class PaymentView(View):
 
 
 class HomeView(View):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.isOpen = False
+
     def get(self, *args, **kwargs):
         try:
             user_name = kwargs.get('user_name')
@@ -363,12 +359,16 @@ class HomeView(View):
             context = {
                 'title': 'Home',
                 'profile': user_profile,
-                'user': self.request.user
+                'user': self.request.user,
+                'isOpenNavbar': self.isOpen,
             }
             return render(self.request, 'home.html', context)
         except ObjectDoesNotExist:
             messages.warning(self.request, "The user profile not found, will redirect to a default page")
             return redirect("/nho/")
+        
+    def openNavbar(self):
+        return not self.isOpen;
     
 class ResumeView(View):
     def get(self, *args, **kwargs):
