@@ -12,5 +12,5 @@ urlpatterns = [
     path('<user_name>/', HomeView.as_view(), name='home'),
     path('<user_name>/resume/', ResumeView.as_view(), name='resume'),
     path('<user_name>/projects/', ProjectView.as_view(), name='projects'),
-    path('<user_name>/contact/', ContactView.as_view(), name='contact'),
+    path(r'<user_name>/contact/', ContactView.as_view(), name='contact'),
 ]

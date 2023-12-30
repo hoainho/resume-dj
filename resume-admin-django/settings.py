@@ -15,7 +15,9 @@ BASE_DIR = os.path.dirname(
     os.path.dirname(os.path.abspath(__file__)))
 print(BASE_DIR)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-
+import ssl
+import certifi
+ssl._create_default_https_context = ssl._create_unverified_context
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -158,3 +160,12 @@ STRIPE_PUBLIC_KEY = 'STRIPE_TEST_PUBLIC_KEY'
 STRIPE_SECRET_KEY = 'STRIPE_TEST_SECRET_KEY'
 
 SITE_ID=2
+
+# Email configuration
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # The SMTP server to connect to.
+EMAIL_PORT = 587  # The port to use for the SMTP server.
+EMAIL_USE_TLS = True  # Whether to use a TLS connection.
+EMAIL_HOST_USER = 'rresumesup@gmail.com'  # Username for the SMTP server.
+EMAIL_HOST_PASSWORD = 'hwsmufohkjlgszsw'  # Password for the SMTP server. https://myaccount.google.com/u/6/apppasswords?utm_source=google-account&utm_medium=myaccountsecurity&utm_campaign=tsv-settings&rapt=AEjHL4NafFzyWLKSfURrezjhNGTJoUkvuCsvgR-X-FVYKzz6IfvNQraESJ77-1eV2c2s5uxDV3JfX7_jyYFgqom5jRc5V5pjXYcXjJ3bJ2hdf6YEP36aY7M

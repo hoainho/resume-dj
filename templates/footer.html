@@ -1,4 +1,4 @@
-<div class="relative flex items-start sm:items-center justify-between px-24 py-14 flex-row footer-direction">
+<div class="relative flex items-start sm:items-center justify-between px-24 py-14 footer-direction">
   <div class="flex flex-col justify-start items-start sm:items-center mt-3 sm:mt-0">
     <h2 class="mb-1">© 2023 by {{ request.user|capfirst }}</h2>
     <h2>
@@ -11,7 +11,7 @@
       </a>
     </h2>
   </div>
-  <div class="flex justify-start items-center flex-wrap sm:flex-nowrap">
+  <div class="flex justify-start items-center flex-wrap sm:flex-nowrap social-link">
     <div class="flex flex-col items-start sm:items-center justify-center my-2 mr-4 sm:my-0 sm:mx-8">
       <h2 class="text-medium font-bold mb-2 sm:mb-4">Call</h2>
       <h2 class="text-medium font-light">+84 {{ request.user.userprofile.phone }}</h2>

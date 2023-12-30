@@ -1101,10 +1101,6 @@ select {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
-.flex-row {
-  flex-direction: row;
-}
-
 .flex-col {
   flex-direction: column;
 }
@@ -1152,6 +1148,10 @@ select {
 
 .gap-y-8 {
   row-gap: 2rem;
+}
+
+.whitespace-nowrap {
+  white-space: nowrap;
 }
 
 .break-all {
@@ -1613,6 +1613,17 @@ select {
     visibility: hidden;
     transition: all 0.5s ease-in-out;
   }
+
+  .footer-direction{
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    padding: 24px;
+  }
+    .footer-direction .social-link {
+      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: flex-start;
+    }
 }
 
 .placeholder\:text-gray-400::-moz-placeholder {

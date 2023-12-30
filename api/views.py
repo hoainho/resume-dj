@@ -14,7 +14,11 @@ from django.views.generic import DetailView, View
 from .forms import CheckoutForm, CouponForm, RefundForm, PaymentForm
 from .models import EducationItem, Item, OrderItem, Order, Address, Payment, Coupon, Refund, SkillItem, UserProfile, ProjectItem, ExperienceItem
 from django.template import RequestContext
-
+from django.core.mail import EmailMessage as DjangoEmailMessage
+from django.core.mail import send_mail
+# and if you need to use Python's email module
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
@@ -408,6 +412,44 @@ class ContactView(View):
             'profile': user_profile,
         }
         return render(self.request, 'contact.html', context)
+    def post(self, *args, **kwargs):
+        user_profile = UserProfile.objects.get(user__username=kwargs.get('user_name'))
+        first_name = self.request.POST.get('first-name') or ""
+        last_name = self.request.POST.get('last-name') or ""
+        email_address = self.request.POST.get('email') or ""
+        subject = self.request.POST.get('subject') or ""
+        message = self.request.POST.get('message') or ""
+        print(first_name, last_name, email_address, subject, message)
+        context = {
+            'title': 'Contact',
+            'profile': user_profile,
+            'default_value': {
+                'first_name': first_name,
+                'last_name': last_name,
+                'email': email_address,
+               'subject': subject,
+               'message': message,
+            }
+        }
+        if first_name and last_name and email_address and subject and message:
+            try:
+                # html_content = "<strong>This's message from Resume Page</strong>"
+                res = send_mail(
+                    subject,
+                    message,
+                    settings.EMAIL_HOST_USER,
+                    [email_address],
+                )
+                # res = email_message.send()
+                messages.success(self.request, "Your message was sent successfully" + str(res))
+                return render(self.request, 'contact.html', context)
+            except Exception as e:
+                messages.warning(self.request, "Your message was not sent" + str(e))
+                return render(self.request, 'contact.html', context)
+                
+        messages.warning(self.request, "Invalid data received")
+        return render(self.request, 'contact.html', context)
+
 
 class LogoutView(View):
     template_name = "logout.html"

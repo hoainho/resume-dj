@@ -77,7 +77,7 @@
     <div class="navbar-item mx-2">
       <a
         href="{% url 'v1:home' user_name=profile %}"
-        class="text-xl text-nowrap font-light uppercase {% if title == 'Home' %} text-primary {% endif %}"
+        class="text-xl  whitespace-nowrap font-light uppercase {% if title == 'Home' %} text-primary {% endif %}"
       >
         About me
       </a>
@@ -85,7 +85,7 @@
     <div class="navbar-item mx-2">
       <a
         href="{% url 'v1:resume' user_name=profile %}"
-        class="text-xl text-nowrap font-light uppercase {% if 'resume' in request.path %} text-primary {% endif %}"
+        class="text-xl  whitespace-nowrap font-light uppercase {% if 'resume' in request.path %} text-primary {% endif %}"
       >
         Resume
       </a>
@@ -93,7 +93,7 @@
     <div class="navbar-item mx-2">
       <a
         href="{% url 'v1:projects' user_name=profile %}"
-        class="text-xl text-nowrap font-light uppercase {% if 'project' in request.path %} text-primary {% endif %}"
+        class="text-xl  whitespace-nowrap font-light uppercase {% if 'project' in request.path %} text-primary {% endif %}"
       >
         Projects
       </a>
@@ -101,7 +101,7 @@
     <div class="navbar-item mx-2">
       <a
         href="{% url 'v1:contact' user_name=profile %}"
-        class="text-xl text-nowrap font-light uppercase {% if 'contact' in request.path %} text-primary {% endif %}"
+        class="text-xl  whitespace-nowrap font-light uppercase {% if 'contact' in request.path %} text-primary {% endif %}"
       >
         Contacts
       </a>
