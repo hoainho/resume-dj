@@ -1,0 +1,51 @@
+{% load static %} 
+{% load static tailwind_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Intro Page</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    />
+    <link
+      href="theme/static/css/dist/styles.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    {% tailwind_css %}
+  </head>
+  <body>
+    <div class="relative">
+      <div class="absolute top-2/4 left-2/4 -translate-y-64 -translate-x-2/4 inset-0 w-[auto] h-[100px]">
+        <img src="{% static 'img/nhn.svg' %}" alt="logo" class="w-full h-full object-contain">
+      </div>
+      <div class="flex min-h-screen items-center justify-center p-5 gap-5">
+        {% for profile in profiles %}
+            {% comment %} <a href="{% url '/v1/'|add:profile.user.username %}"> {% endcomment %}
+            <a href="{% url 'v1:home' profile.user.username %}">
+                <div
+                class="w-[120px] h-[120px] transition-all ease-in-out border-0 hover:transition-all hover:border-4 border-sky-400 rounded overflow-hidden bg-gray-200 flex items-center justify-center cursor-pointer"
+                >
+                    <img
+                        src="{% static profile.avatar %}"
+                        alt="logo"
+                        class="w-full h-full object-cover"
+                    />
+                </div>
+            </a>
+            
+        {% endfor %}
+      <div
+        class="absolute top-0 left-0 w-screen h-screen min-h-screen bg-overlay z-[-1]"
+      ></div>
+    </div>
+  </body>
+</html>

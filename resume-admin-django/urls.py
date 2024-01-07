@@ -16,8 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from api.views import IntroView
+
+app_name = 'resume'
 
 urlpatterns = [
+    path('', IntroView.as_view(), name='resume'),
     path('v1/', include('api.urls', namespace='v1')),
     path('admin/', admin.site.urls),
     # path("__reload__/", include("django_browser_reload.urls")),

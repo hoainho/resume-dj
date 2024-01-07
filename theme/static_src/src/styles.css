@@ -6,6 +6,10 @@
 .text-primary{
     color: #0D6EFD;
 }
+.bg-overlay {
+    background: rgb(0,0,0);
+    background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(21,69,73,1) 35%, rgba(244,236,230,1) 100%);
+}
 @media only screen and (max-width: 600px) {
     .navbar-mobile{
         position: absolute;

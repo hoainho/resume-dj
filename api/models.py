@@ -51,6 +51,7 @@ class UserProfile(models.Model):
     introduce = models.CharField(max_length=500, blank=True, null=True)
     major = models.CharField(max_length=20, blank=True, null=True)
     phone = models.CharField(max_length=11, blank=True, null=True)
+    avatar = models.ImageField(upload_to='avatar', blank=True, null=True)
     def __str__(self):
         return self.user.username 
     def get_social(self):
@@ -217,7 +218,7 @@ class ProjectItem(models.Model):
     name = models.CharField(max_length=50)
     role = models.CharField(max_length=50)
     description = models.CharField(max_length=500)
-    image = models.CharField(max_length=100, default="img/sample.jpg")
+    image = models.ImageField(upload_to='projects/', blank=True, null=True)
     def __str__(self):
         return self.name + " - " + self.role
 
