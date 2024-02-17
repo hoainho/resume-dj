@@ -16,7 +16,6 @@ BASE_DIR = os.path.dirname(
 print(BASE_DIR)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 import ssl
-import certifi
 ssl._create_default_https_context = ssl._create_unverified_context
 
 # Quick-start development settings - unsuitable for production
@@ -43,10 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # 'crispy_forms',
     'django_countries',
     'tailwind',
     'theme',

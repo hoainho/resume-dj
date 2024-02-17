@@ -186,7 +186,7 @@ class IntroView(View):
             context = {
                 'profiles': profiles,
             }
-            return render(self.request, 'pages/introduce_page/intro.html', context)
+            return render(self.request, 'intro.html', context)
         except ObjectDoesNotExist:
             messages.warning(self.request, "The user profile not found, will redirect to a default page")
             return redirect("/v1/nho/")
