@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
+
 BASE_DIR = os.path.dirname(
     os.path.dirname(os.path.abspath(__file__)))
 print(BASE_DIR)
@@ -18,6 +20,7 @@ print(BASE_DIR)
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
+load_dotenv()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -90,11 +93,11 @@ WSGI_APPLICATION = 'resume-admin-django.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "RESUME",
-        "USER": "postgres",
-        "PASSWORD": "alloydbpass",
-        "HOST": "localhost",
-        "PORT": 5432,
+        'NAME': os.environ.get('DB_NAME', 'RESUME'),
+        'USER': os.environ.get('DB_USER', 'postgres'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'postgres'),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
 
